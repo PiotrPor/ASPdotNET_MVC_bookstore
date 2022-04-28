@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!-- docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/creating-an-entity-framework-data-model-for-an-asp-net-mvc-application -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Ksiegarnia</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Projekt-Ksiegarnia", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <!-- drugi argument to nazwa funkcji w XyzvController.cs gdzie "XYzv" to tutaj "Home" -->
+                    <li>@Html.ActionLink("Domowa Strona", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Lista Ksiazek", "Index", "Ksiazka")</li>
+                    <li>@Html.ActionLink("Klienci", "Index", "Klient")</li>
+                    <li>@Html.ActionLink("Lista Wypozyczen", "Index", "Wypozyczenie")</li>
+                    <li>@Html.ActionLink("Na temat", "About", "Home")</li>
+                    <li>@Html.ActionLink("Dane kontaktowe", "Kontakt", "Home")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody() <!-- tu jest to co w Views/Home/Index.cshtml -->
+        <hr />
+        <footer>
+            <p>&copy; Stopka wypisuje rok: @DateTime.Now.Year </p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

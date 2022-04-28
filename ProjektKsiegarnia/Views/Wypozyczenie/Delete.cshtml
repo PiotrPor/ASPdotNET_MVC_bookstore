@@ -1,0 +1,40 @@
+﻿@model ProjektKsiegarnia.Models.Wypozyczenie
+
+@{
+    ViewBag.Title = "Skasuj";
+}
+
+<h2>Skasuj</h2>
+
+<h3>Jestes pewien?</h3>
+<div>
+    <h4>Wypozyczenie</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ksiazka.Tytul)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ksiazka.Tytul)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.wypozyczajacy.ImieNazwisko)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.wypozyczajacy.ImieNazwisko)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Powrót", "Index")
+        </div>
+    }
+</div>

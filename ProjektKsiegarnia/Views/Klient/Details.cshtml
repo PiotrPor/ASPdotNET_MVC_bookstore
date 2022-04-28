@@ -1,0 +1,70 @@
+﻿@model ProjektKsiegarnia.Models.KlasaDetali
+
+@{
+    ViewBag.Title = "Detale";
+}
+
+<h2>Szczegóły</h2>
+
+<div>
+    <h4>Klient</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt> Imie i Nazwisko </dt>
+        <dd> @Html.DisplayFor(model => model.Tozsamosc) </dd>
+
+        <dt> @Html.DisplayNameFor(model => model.OdKiedy) </dt>
+        <dd> @Html.DisplayFor(model => model.OdKiedy) </dd>
+
+    </dl>
+    @{ if (Model.IleWypozyczonych > 0)
+        {
+            @:<table class="table">
+                @:<tr>
+                    @:   <td> Tytul </td> <td> Autor </td> <td> Cena </td> <td> Ilość </td>
+                @:</tr>
+
+                int a = 0;
+                int ile = Model.IleWypozyczonych;
+                string ttt, aaa;
+                float ccc;
+                int iii;
+                for (a = 0; a < ile; a++)
+                {
+                    ttt = Model.JegoKsiazki[a].Tytul;
+                    aaa = Model.JegoKsiazki[a].Autor;
+                    ccc = Model.JegoKsiazki[a].Cena;
+                    iii = Model.JegoKsiazki[a].Ile;
+                    @:<tr>
+                        @: <td> @Html.Raw(ttt) </td>
+                        @: <td> @Html.Raw(aaa) </td>
+                        @: <td> @Html.Raw(ccc) </td>
+                        @: <td> @Html.Raw(iii) </td>
+                    @:</tr>
+                }
+            @:</table> <br>
+
+            float jejcena, SumaCen = 0;
+            int ilesztuk;
+            for (a = 0; a < ile; a++)
+            {
+                jejcena = Model.JegoKsiazki[a].Cena;
+                ilesztuk = Model.JegoKsiazki[a].Ile;
+                SumaCen += (float)ilesztuk * jejcena;
+            }
+            //@:Laczna cena ksiazek: <b> @SumaCen </b>PLN 
+            @Html.Raw("Sumaryczna cena ksiazek: ");
+            @:<b>
+            @Html.Raw(SumaCen);
+            @:</b>
+            @Html.Raw(" PLN");
+        }
+        else
+        {
+            @:<font color="green"> Nie wypozyczyl zadnych ksiazek </font>
+        }
+    }
+</div>
+<p>
+    @Html.ActionLink("Powrót", "Index")
+</p>

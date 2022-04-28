@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ProjektKsiegarnia.Models.Wypozyczenie>
+
+@{
+    ViewBag.Title = "Index";
+    int LoginNr = ProjektKsiegarnia.Models.KlasaDlaSesji.IDuzytkownika;
+}
+
+<h2>Wypozyczenia/Zakupy</h2>
+
+<p>
+    @if (LoginNr == 0)
+    {
+    @Html.ActionLink("Stwórz nowe", "Create")
+    }
+</p>
+
+<table class="table">
+    @if (Model.Count() > 0)
+    {
+        <tr>
+            <th> @Html.DisplayNameFor(model => model.WypozyczenieId) </th>
+            <th> @Html.DisplayNameFor(model => model.ksiazka.Tytul) </th>
+            <th> @Html.DisplayNameFor(model => model.wypozyczajacy.ImieNazwisko) </th>
+            <th> Ile </th>
+            <th>  </th>
+        </tr>
+    }
+
+    @foreach (var item in Model)
+    {
+        if (LoginNr == 0 || LoginNr == item.KlientId)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WypozyczenieId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ksiazka.Tytul)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.wypozyczajacy.ImieNazwisko)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ile)
+                </td>
+                <td>
+
+                    @Html.ActionLink("Szczegóły", "Details", new { id = item.WypozyczenieId })
+                    @if (LoginNr == 0)
+                    {
+                        @Html.Raw(" | ")
+                        @Html.ActionLink("Edytuj", "Edit", new { id = item.WypozyczenieId })
+                        @Html.Raw(" | ")
+                        @Html.ActionLink("Delete", "Delete", new { id = item.WypozyczenieId })
+                    }
+                </td>
+            </tr>
+        }
+    }
+
+</table>

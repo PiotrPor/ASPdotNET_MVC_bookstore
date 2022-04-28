@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ProjektKsiegarnia.Models.Klient>
+
+@{
+    ViewBag.Title = "Wszyscy klienci";
+    int LoginNr = ProjektKsiegarnia.Models.KlasaDlaSesji.IDuzytkownika;
+}
+
+<h2>Klienci</h2>
+
+<p>
+    @if (LoginNr == 0)
+    {
+    @Html.ActionLink("Stwórz nowe", "Create")
+    }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ImieNazwisko)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataDolaczenia)
+        </th>
+        <th> Opcje </th>
+    </tr>
+
+@foreach (var item in Model) 
+{
+    if (item.KlientId >= 0)
+    {
+    <tr>
+        <td> @Html.DisplayFor(modelItem => item.ImieNazwisko) </td>
+        <td> @Html.DisplayFor(modelItem => item.DataDolaczenia) </td>
+        <td>
+            @if (LoginNr == 0)
+            {
+                @Html.ActionLink("Edytuj", "Edit", new { id = item.KlientId })
+                @Html.Raw(" | ")
+                @Html.ActionLink("Skasuj", "Delete", new { id = item.KlientId })
+                @Html.Raw(" | ")
+            }
+            @if (LoginNr == item.KlientId || LoginNr == 0)
+            {
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.KlientId })
+            }
+            @if (!(LoginNr == item.KlientId || LoginNr == 0))
+            {
+                <u> ##### </u>
+            }
+        </td>
+    </tr>
+    }
+}
+
+</table>

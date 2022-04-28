@@ -1,0 +1,62 @@
+﻿@model ProjektKsiegarnia.Models.Klient
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Klient</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ImieNazwisko)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImieNazwisko)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataDolaczenia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataDolaczenia)
+        </dd>
+
+    </dl>
+    @{
+        //@foreach(var kk in Model.Nabyte.Count()) { }
+        //<td> @{ Model.Nabyte.ElementAt(0).Tytul } </td>
+        int ile=24, a = 0;
+        ile = Model.Nabyte.Count();
+        //ProjektKsiegarnia.Models.Ksiazka ks = Model.Nabyte.ElementAt(a);
+    }
+    <table class="table">
+        <tr>
+            <td> Tytul </td>
+            <td> Autor </td>
+            <td> Cena </td>
+        </tr>
+        <tr> <!-- debug !!! -->
+            <td> @ile </td>
+            <td> @ile </td>
+            <td> @a </td>
+        </tr>
+        @while (a < ile)
+        {
+        <tr>
+            <td> @Html.DisplayFor(Model => Model.Nabyte.ElementAt(a).Tytul) </td>
+            <td> @Html.DisplayFor(Model => Model.Nabyte.ElementAt(a).Autor) </td>
+            <td> @Html.DisplayFor(Model => Model.Nabyte.ElementAt(a).Cena) </td>
+        </tr>
+            a = a + 1;
+        }
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.KlientId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

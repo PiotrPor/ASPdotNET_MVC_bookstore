@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Strona domowa";
+}
+<!--
+  docs.microsoft.com/en-us/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/creating-an-entity-framework-data-model-for-an-asp-net-mvc-application
+-->
+<div class="jumbotron">
+    <h1> Ksiegarnia </h1>
+    <p class="lead"> Zrobiona w ASP.NET prymitywna strona ksiegarni </p>
+    <p><a href="https://asp.net" class="btn btn-primary btn-lg"> Czytaj o ASP.NET &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2> WFIS </h2>
+         Wydzial Fizyki i Informatyki Stosowanej <br>
+         Uniwersytetu Lodzkiego <br>
+        <a href="http://www.wfis.uni.lodz.pl">Strona wydzialu</a>
+        <!-- <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p> -->
+    </div>
+    <div>
+        <h2> Dlaczego? </h2>
+        <p> Projekt na zaliczenie przedmiotu "Podstawy platformy ASP.NET" </p>
+    </div>
+</div>
+<div>
+<hr/>
+<div>
+    @{ 
+        int ilewszystkich = ProjektKsiegarnia.Models.KlasaDlaSesji.IleMozliwychUzytkownikow;
+        string[] lista = ProjektKsiegarnia.Models.KlasaDlaSesji.Nazwy;
+        int a;
+    }
+    Badz zalogowany jako: <br>
+    @for (a = 1; a <= ilewszystkich; a++)
+    {
+        //odwolanie do metody UstawKto() w "HomeController.cs"
+        @Html.ActionLink(lista[a-1], "UstawKto", new {ktory=a})
+        @Html.Raw(" || ")
+    }
+</div>

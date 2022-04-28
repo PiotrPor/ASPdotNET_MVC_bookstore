@@ -1,0 +1,32 @@
+﻿@model ProjektKsiegarnia.Models.Wypozyczenie
+
+@{
+    ViewBag.Title = "Detale";
+}
+
+<h2>Szczegóły</h2>
+
+<div>
+    <h4>Wypozyczenie</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt> @Html.DisplayNameFor(model => model.ksiazka.Tytul) </dt>
+        <dd> @Html.DisplayFor(model => model.ksiazka.Tytul) </dd>
+
+        <dt> @Html.DisplayNameFor(model => model.wypozyczajacy.ImieNazwisko) </dt>
+        <dd> @Html.DisplayFor(model => model.wypozyczajacy.ImieNazwisko) </dd>
+
+        <dt> Ile </dt>
+        <dd> @Html.DisplayFor(model => model.Ile) </dd>
+
+    </dl>
+    @{ 
+        float SumaCen = 0;
+        SumaCen = (float)Model.Ile * Model.ksiazka.Cena;
+    }
+    <br> Sumaryczna cena: <b>@SumaCen</b> PLN <br>
+</div>
+<p>
+    @Html.ActionLink("Edytuj", "Edit", new { id = Model.WypozyczenieId }) |
+    @Html.ActionLink("Powrót", "Index")
+</p>

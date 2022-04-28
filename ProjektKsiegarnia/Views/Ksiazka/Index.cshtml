@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ProjektKsiegarnia.Models.Ksiazka>
+
+@{
+    ViewBag.Title = "Wszystkie ksiazki";
+    int LoginNr = ProjektKsiegarnia.Models.KlasaDlaSesji.IDuzytkownika;
+}
+
+<h2>Ksiazki</h2>
+
+<p>
+    @if (LoginNr == 0)
+    {
+        @Html.ActionLink("Stwórz nowe", "Create")
+    }
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Tytul", "Index", new { porzadekSortowania = ViewBag.TitleSortParam })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Autor)
+        </th>
+        <th>
+            @Html.ActionLink("Cena", "Index", new { porzadekSortowania = ViewBag.PriceSortParam })
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tytul)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Autor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cena)
+            @Html.Raw(" PLN")
+        </td>
+        <td>
+            <!-- wywola "Details()" z "Controllers/KsiazkaController.cs" z podanym parametrem 'id' -->
+            @Html.ActionLink("Szczegóły", "Details", new { id = item.KsiazkaId })
+            @if (LoginNr > 0)
+            {
+                @Html.Raw(" | ")
+                @Html.ActionLink("Kup", "Zakup", new { id = item.KsiazkaId })
+            }
+            @if (LoginNr == 0)
+            {
+                @Html.Raw(" | ")
+                @Html.ActionLink("Edytuj", "Edit", new { id = item.KsiazkaId })
+                @Html.Raw(" | ")
+                @Html.ActionLink("Skasuj", "Delete", new { id = item.KsiazkaId })
+            }
+        </td>
+    </tr>
+}
+
+</table>
